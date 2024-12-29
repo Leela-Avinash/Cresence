@@ -1,9 +1,16 @@
-import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Scene from './model_components/Scene';
+import ExploreCollege from './components/ExploreCollege';
 
-export default function App() {
+function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Scene />} />
+        <Route path="/explore" element={<ExploreCollege />} />
+      </Routes>
+    </Router>
+  );
 }
+
+export default App;
