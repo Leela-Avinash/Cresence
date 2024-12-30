@@ -20,9 +20,9 @@ export default function ShootingStar() {
   useFrame(() => {
     const star = starRef.current;
     if (!star) return;
-    star.position.z += 0.5; // Move star forward
+    star.position.z += 0.5;
     if (star.position.z > 10) {
-      star.position.set(...randomStartPosition()); // Reset when it exits view
+      star.position.set(...randomStartPosition());
     }
   });
 

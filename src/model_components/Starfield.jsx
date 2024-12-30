@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 
@@ -31,29 +31,47 @@ function generateStarfield(numStars = 500) {
 export default function Starfield({ numStars = 500 }) {
   const stars = useMemo(() => generateStarfield(numStars), [numStars]);
   const texture = useLoader(THREE.TextureLoader, './textures/circle.png');
+  
+  // Create a reference for the starfield group to apply rotation
+  const starfieldRef = useRef();
+  const rotationSpeed = 0.00028; // Rotation speed
+
+  // Animate the starfield's rotation
+  useEffect(() => {
+    const animateRotation = () => {
+      if (starfieldRef.current) {
+        starfieldRef.current.rotation.y += rotationSpeed; // Rotate around the Y-axis
+      }
+      requestAnimationFrame(animateRotation); // Loop the animation
+    };
+
+    animateRotation();
+  }, [rotationSpeed]);
 
   return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          array={new Float32Array(stars.positions)}
-          count={stars.positions.length / 3}
-          itemSize={3}
+    <group ref={starfieldRef}>
+      <points>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={new Float32Array(stars.positions)}
+            count={stars.positions.length / 3}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            array={new Float32Array(stars.colors)}
+            count={stars.colors.length / 3}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.2}
+          vertexColors
+          map={texture}
+          transparent
         />
-        <bufferAttribute
-          attach="attributes-color"
-          array={new Float32Array(stars.colors)}
-          count={stars.colors.length / 3}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.2}
-        vertexColors
-        map={texture}
-        transparent
-      />
-    </points>
+      </points>
+    </group>
   );
 }

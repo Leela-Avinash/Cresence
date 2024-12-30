@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useGLTF, Environment, OrbitControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import React, { useState, useEffect, useRef } from "react";
+import { useGLTF, Environment } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
+import gsap from "gsap";
 
 export default function CresenceText(props) {
   const { nodes, materials } = useGLTF("/models/CRESENCE.glb");
   const [scale, setScale] = useState([5, 5, 5]);
-  const [rotation, setRotation] = useState([0, 0, 0]);
+  const textRef = useRef();
 
   useEffect(() => {
     if (materials["Diamond Dust"]) {
       materials["Diamond Dust"].roughness = 0;
-      materials["Diamond Dust"].metalness = 1; 
+      materials["Diamond Dust"].metalness = 1;
     }
   }, [materials]);
 
@@ -19,10 +20,12 @@ export default function CresenceText(props) {
       const width = window.innerWidth;
       const height = window.innerHeight;
 
-      if (width <= 480) { 
+      if (width <= 480) {
         setScale([2.5, 2.5, 2.5]);
       } else if (width <= 768) {
-        setScale([4, 4, 4]); 
+        setScale([4, 4, 4]);
+      } else if (width <= 1024) {
+        setScale([5, 5, 5]);
       } else {
         setScale([5, 5, 5]);
       }
@@ -33,22 +36,23 @@ export default function CresenceText(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // useEffect(() => {
-  //   const handleMouseMove = (event) => {
-  //     const { innerWidth: width, innerHeight: height } = window;
-  //     const x = (event.clientX / width) * 2 - 1;
-  //     const y = -(event.clientY / height) * 2 + 1;
-
-  //     setRotation([y * 0.2, x * 0.2, 0]);
-  //   };
-
-  //   window.addEventListener("mousemove", handleMouseMove);
-  //   return () => window.removeEventListener("mousemove", handleMouseMove);
-  // }, []);
+  useEffect(() => {
+    // Floating effect with GSAP
+    gsap.to(textRef.current.position, {
+      y: "+=0.02 ", 
+      repeat: -1,
+      yoyo: true,
+      duration: 2,
+      ease: "power1.inOut", // Adjust easing for smooth animation
+    });
+  }, []);
 
   return (
-    <group {...props} dispose={null} position={[0, 0, 0]} scale={scale} rotation={rotation}>
+    <group {...props} dispose={null} position={[0, -0.02, 0]} scale={scale} ref={textRef}>
+      {/* Add environment for realistic reflections */}
       <Environment preset="sunset" />
+
+      {/* Lighting Setup */}
       <ambientLight intensity={0.5} />
       <directionalLight intensity={0.5} position={[10, 10, 10]} castShadow />
       <spotLight
@@ -118,6 +122,7 @@ export default function CresenceText(props) {
           position={[97.433, 0, 0]}
         />
       </group>
+      <OrbitControls enableZoom={false} />
     </group>
   );
 }
