@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
-import { useLoader } from '@react-three/fiber';
+import { useLoader, useFrame } from '@react-three/fiber';
 
 function generateStarfield(numStars = 500) {
   const randomSpherePoint = () => {
@@ -32,24 +32,52 @@ export default function Starfield({ numStars = 500 }) {
   const stars = useMemo(() => generateStarfield(numStars), [numStars]);
   const texture = useLoader(THREE.TextureLoader, './textures/circle.png');
   
-  // Create a reference for the starfield group to apply rotation
   const starfieldRef = useRef();
-  const rotationSpeed = 0.00028; // Rotation speed
+  const rotationSpeed = 0.00028;
 
-  // Animate the starfield's rotation
   useEffect(() => {
     const animateRotation = () => {
       if (starfieldRef.current) {
-        starfieldRef.current.rotation.y += rotationSpeed; // Rotate around the Y-axis
+        starfieldRef.current.rotation.y += rotationSpeed;
       }
-      requestAnimationFrame(animateRotation); // Loop the animation
+      requestAnimationFrame(animateRotation);
     };
 
     animateRotation();
   }, [rotationSpeed]);
 
+  useFrame(() => {
+    if (starfieldRef.current && starfieldRef.current.geometry && starfieldRef.current.geometry.attributes) {
+      const positions = starfieldRef.current.geometry.attributes.position.array;
+      const scales = starfieldRef.current.geometry.attributes.scale.array;
+      for (let i = 0; i < positions.length; i += 3) {
+        scales[i / 3] = 1 + Math.sin(Date.now() * 0.001 + positions[i]) * 0.5;
+      }
+      starfieldRef.current.geometry.attributes.scale.needsUpdate = true;
+    }
+  });
+
+  const handlePointerMove = (event) => {
+    if (starfieldRef.current && starfieldRef.current.geometry && starfieldRef.current.geometry.attributes) {
+      const mouse = new THREE.Vector2();
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, starfieldRef.current.parent.camera);
+
+      const intersects = raycaster.intersectObject(starfieldRef.current);
+      if (intersects.length > 0) {
+        const index = intersects[0].index;
+        const scales = starfieldRef.current.geometry.attributes.scale.array;
+        scales[index] = 2; // Make the star glow
+        starfieldRef.current.geometry.attributes.scale.needsUpdate = true;
+      }
+    }
+  };
+
   return (
-    <group ref={starfieldRef}>
+    <group ref={starfieldRef} onPointerMove={handlePointerMove}>
       <points>
         <bufferGeometry>
           <bufferAttribute
@@ -63,6 +91,12 @@ export default function Starfield({ numStars = 500 }) {
             array={new Float32Array(stars.colors)}
             count={stars.colors.length / 3}
             itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-scale"
+            array={new Float32Array(stars.positions.length / 3).fill(1)}
+            count={stars.positions.length / 3}
+            itemSize={1}
           />
         </bufferGeometry>
         <pointsMaterial

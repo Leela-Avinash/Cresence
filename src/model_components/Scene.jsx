@@ -29,7 +29,7 @@ export default function Scene() {
 
     React.useEffect(() => {
         if (progress === 100) {
-            setTimeout(() => setLoaded(true), 500); // Add slight delay for a smooth transition
+            setTimeout(() => setLoaded(true), 500); 
         }
     }, [progress]);
 
