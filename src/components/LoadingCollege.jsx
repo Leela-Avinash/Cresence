@@ -85,7 +85,6 @@ export default function LoadingCollege({ setVideoLoaded }) {
                 <PerspectiveCamera />
                 <Starfield numStars={3000} />
                 <ShootingStar />
-                <ambientLight intensity={0.5} />
             </Canvas>
 
             <div className="absolute inset-0 flex items-center justify-center z-10 text-white">

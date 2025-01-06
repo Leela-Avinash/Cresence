@@ -49,19 +49,18 @@ export default function CresenceText(props) {
 
   return (
     <group {...props} dispose={null} position={[0, -0.02, 0]} scale={scale} ref={textRef}>
-      {/* Add environment for realistic reflections */}
-      <Environment preset="sunset" />
+      <Environment preset="sunset" background={false} />  
 
       {/* Lighting Setup */}
-      <ambientLight intensity={0.5} />
-      <directionalLight intensity={0.5} position={[10, 10, 10]} castShadow />
-      <spotLight
+      {/* <ambientLight intensity={0.5} /> */}
+      {/* <directionalLight intensity={0.5} position={[10, 10, 10]} castShadow /> */}
+      {/* <spotLight
         intensity={0.5}
         angle={Math.PI / 6}
         penumbra={0.5}
         position={[0, 5, 10]}
         castShadow
-      />
+      /> */}
 
       {/* 3D Text */}
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.001}>

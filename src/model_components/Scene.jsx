@@ -34,23 +34,13 @@ export default function Scene() {
     }, [progress]);
 
     return (
-        <div className="w-[100dvw] h-[100dvh] bg-black relative">
+        <div className="w-full h-full bg-black fixed top-0 left-0">
             {!loaded && <LoadingCresence progress={progress}/>}
             <Canvas onCreated={() => setLoaded(true)}>
                 <PerspectiveCamera />
                 <Starfield numStars={3000} />
                 <ShootingStar />
-                <ambientLight intensity={0.5} />
-                <CresenceText />
             </Canvas>
-            {loaded && (
-                <button
-                    className="absolute bottom-5 right-5 px-5 py-2 bg-white/10 border border-white/50 text-white rounded-md hover:bg-white/20 transition"
-                    onClick={() => navigate("/explore")}
-                >
-                    Explore →
-                </button>
-            )}
         </div>
     );
 }
