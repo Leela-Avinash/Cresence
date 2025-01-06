@@ -5,6 +5,10 @@ import CresenceText from "./Cresence_text";
 import { useNavigate } from "react-router-dom";
 import LoadingCresence from "../components/LoadingCresence";
 import Moon from "./Moon";
+import FestVideo from "../components/FestVideo";
+import Cyber from "../components/Cyber";
+import Space from "../components/Space";
+import ML from "../components/ML";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -62,6 +66,12 @@ export default function HomeScene() {
                             Explore →
                         </button>
                     </div>
+                    <FestVideo />
+                    <Cyber/>
+                    <ML/>
+                    <Space/>
+                    {/* <h1 className="absolute z-20 text-3xl font-bold text-white bg-slate-500 w-full">Charan</h1> */}
+
 
                     {/* Hello Section */}
                     <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent">
@@ -69,6 +79,8 @@ export default function HomeScene() {
                     </div>
                 </div>
             )}
+
+            
         </div>
     );
 }

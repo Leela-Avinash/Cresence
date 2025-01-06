@@ -9,13 +9,16 @@ function App() {
       <div className="relative w-full h-full">
         <div className="absolute inset-0 z-0">
           <Scene />
+          <h1 className="bg-slate-200">fsfskfskfsksk</h1>
         </div>
+        
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<HomeScene />} />
             <Route path="/explore" element={<ExploreCollege />} />
           </Routes>
         </div>
+        
       </div>
     </Router>
   );
