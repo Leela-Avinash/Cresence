@@ -17,7 +17,7 @@ export default function FestVideo() {
               className="w-full h-64 md:h-80 lg:h-96 rounded-md"
               width="560"
               height="315"
-             src="https://www.youtube.com/embed/49S9fEaoSyc"
+              src="https://www.youtube.com/embed/49S9fEaoSyc"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -25,11 +25,11 @@ export default function FestVideo() {
           </div>
 
           {/* About Video Section */}
-          <div className="flex-1 p-4 shadow-md rounded-lg">
-            <h2 className="text-white text-2xl font-semibold mb-2 text-xl md:text-2xl xl:text-3xl">
+          <div className="flex-1 items-center p-4 shadow-md rounded-lg">
+            <h2 className="text-white text-2xl font-semibold mb-2 text-xl md:text-2xl xl:text-3xl md:mt-10 ">
               About the Video
             </h2>
-            <p className="text-white text-lg md:text-xl xl:text-xl">
+            <p className="text-white text-lg md:text-xl xl:text-xl ">
               This video showcases the highlights of our fest, capturing the
               spirit and energy of the event. It includes memorable moments and
               performances that made this celebration unforgettable.
