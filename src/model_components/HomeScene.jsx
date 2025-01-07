@@ -6,9 +6,8 @@ import { useNavigate } from "react-router-dom";
 import LoadingCresence from "../components/LoadingCresence";
 import Moon from "./Moon";
 import FestVideo from "../components/FestVideo";
-import Cyber from "../components/Cyber";
-import Space from "../components/Space";
-import ML from "../components/ML";
+import WorkShops from "../components/WorkShops";
+
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -67,9 +66,7 @@ export default function HomeScene() {
                         </button>
                     </div>
                     <FestVideo />
-                    <Cyber/>
-                    <ML/>
-                    <Space/>
+                    <WorkShops/>
                     {/* <h1 className="absolute z-20 text-3xl font-bold text-white bg-slate-500 w-full">Charan</h1> */}
 
 
