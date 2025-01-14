@@ -11,21 +11,25 @@ export default function FestVideo() {
       {/* Content Section */}
       <div className="relative z-30 flex flex-col items-center justify-center pt-32">
         <div className="flex flex-col md:flex md:flex-row w-11/12 max-w-6xl gap-4">
-          {/* Video Section */}
-          <div className="flex-1  p-4 shadow-md rounded-lg">
-            <video
-              className="w-full h-auto rounded-md"
-              controls
-              src="../public/v2.mp4"
-            >
-              Your browser does not support the video tag.
-            </video>
+          {/* YouTube Video Section */}
+          <div className="flex-1 p-4 shadow-md rounded-lg">
+            <iframe
+              className="w-full h-64 md:h-80 lg:h-96 rounded-md"
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/49S9fEaoSyc"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
 
           {/* About Video Section */}
-          <div className="flex-1 p-4 shadow-md rounded-lg">
-            <h2 className="text-white text-2xl font-semibold mb-2  text-xl md:text-2xl xl:text-3xl">About the Video</h2>
-            <p className="text-white  text-lg md:text-xl xl:text-xl">
+          <div className="flex-1 items-center p-4 shadow-md rounded-lg">
+            <h2 className="text-white text-2xl font-semibold mb-2 text-xl md:text-2xl xl:text-3xl md:mt-10 ">
+              About the Video
+            </h2>
+            <p className="text-white text-lg md:text-xl xl:text-xl ">
               This video showcases the highlights of our fest, capturing the
               spirit and energy of the event. It includes memorable moments and
               performances that made this celebration unforgettable.
