@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useProgress } from "@react-three/drei";
-import CresenceText from "./Cresence_text";
+// import CresenceText from "./Cresence_text";
+import CresenceText from "./ParticleSystem";
 import { useNavigate } from "react-router-dom";
 import LoadingCresence from "../components/LoadingCresence";
 import Moon from "./Moon";
@@ -31,23 +32,11 @@ export default function HomeScene() {
     const [loaded, setLoaded] = useState(false);
     const { progress } = useProgress();
 
-    useEffect(() => {
-        if (progress === 100) {
-            setTimeout(() => setLoaded(true), 500);
-        }
-    }, [progress]);
-
     return (
         <div className="w-full h-auto bg-transparent relative">
-            {!loaded && <LoadingCresence progress={progress} />}
-            {loaded && (
+            {/* {!loaded && <LoadingCresence progress={progress} />}
+            {loaded && ( */}
                 <div className="relative w-full h-[100dvh] bg-transparent">
-                    <div className="fixed inset-0 z-0">
-                        <Canvas>
-                            <OrthographicCamera />
-                            {/* <Moon /> */}
-                        </Canvas>
-                    </div>
 
                     {/* Landing Page Content */}
                     <div className="relative z-10 h-[100dvh] flex flex-col items-center justify-center">
@@ -70,7 +59,7 @@ export default function HomeScene() {
                     {/* Hello Section */}
                     <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent"></div>
                 </div>
-            )}
+            {/* )} */}
         </div>
     );
 }
