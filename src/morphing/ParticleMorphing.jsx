@@ -119,13 +119,13 @@ const ParticleSystem = () => {
         ScrollTrigger.create({
             trigger: "#section1",
             start: "bottom center", // When section1's bottom is at the center
-            endTrigger: "#empty-section1",
-            end: "bottom bottom", // When empty-section1's bottom is at the bottom
+            endTrigger: "#section2",
+            end: "top top", // When empty-section1's bottom is at the bottom
             scrub: true,
             onUpdate: (self) => {
                 const progress = self.progress;
                 materialRef.current.uniforms.morphFactor.value = progress;
-                particlesRef.current.position.set( progress * -25, 0, 0);
+                // particlesRef.current.position.set( progress * -25, 0, 0);
             },
         });
     
@@ -133,13 +133,13 @@ const ParticleSystem = () => {
         ScrollTrigger.create({
             trigger: "#section2",
             start: "bottom center", // When section2's bottom is at the center
-            endTrigger: "#empty-section2",
-            end: "bottom bottom", // When empty-section2's bottom is at the bottom
+            endTrigger: "section3",
+            end: "top top", // When empty-section2's bottom is at the bottom
             scrub: true,
             onUpdate: (self) => {
                 const progress = self.progress;
                 materialRef.current.uniforms.morphFactor2.value = progress;
-                particlesRef.current.position.set(progress * 15, 0, 0); 
+                // particlesRef.current.position.set(progress * 15, 0, 0); 
             },
         });
     }, [modelA, modelB, modelC]);

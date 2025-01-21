@@ -1,4 +1,5 @@
 import React from "react";
+import ParticleMorphing from "../morphing/ParticleMorphing";
 
 export default function WorkShops() {
     const workshops = [
@@ -8,6 +9,7 @@ export default function WorkShops() {
             description:
                 "This workshop provides an opportunity to explore and learn about various cutting-edge technologies and their real-world applications. Join us to enhance your skills and knowledge!",
             image: "./images/cyber2.webp",
+            div_id : "section1"
         },
         {
             id: 2,
@@ -15,6 +17,7 @@ export default function WorkShops() {
             description:
                 "This workshop provides an opportunity to explore and learn about various cutting-edge technologies and their real-world applications. Join us to enhance your skills and knowledge! This workshop provides an opportunity to explore and learn about various cutting-edge technologies and their real-world applications. Join us to enhance your skills and knowledge!",
             image: "./images/ml.jpg",
+            div_id : "section2"
         },
         {
             id: 3,
@@ -22,6 +25,7 @@ export default function WorkShops() {
             description:
                 "This workshop provides an opportunity to explore and learn about various cutting-edge technologies and their real-world applications. Join us to enhance your skills and knowledge!",
             image: "./images/space.jpg",
+            div_id : "section3"
         },
     ];
 
@@ -32,7 +36,7 @@ export default function WorkShops() {
                 <h1 className="z-20 pt-20 text-2xl w-full text-center text-white">
                     WORKSHOPS
                 </h1>
-
+                <ParticleMorphing />
                 {workshops.map((workshop, index) => (
                     <div
                         key={workshop.id}
@@ -42,6 +46,7 @@ export default function WorkShops() {
                                 : "md:flex-row-reverse"
                         } items-center justify-center mt-5 mx-4`}
                         style={{ height: "100dvh" }}
+                        id={workshop.div_id}
                     >
                         {/* Image Section */}
                         <div className="flex-1 p-2 md:p-10 mb-10 md:w-[60%]">
