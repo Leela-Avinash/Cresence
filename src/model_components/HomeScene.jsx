@@ -7,7 +7,7 @@ import LoadingCresence from "../components/LoadingCresence";
 import Moon from "./Moon";
 import FestVideo from "../components/FestVideo";
 import WorkShops from "../components/WorkShops";
-
+import Events from "../components/Events";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -41,8 +41,7 @@ export default function HomeScene() {
         <div className="w-full h-auto bg-transparent relative">
             {!loaded && <LoadingCresence progress={progress} />}
             {loaded && (
-                <div className="relative w-full h-[200vh] bg-transparent">
-                    {/* Fixed Background Scene */}
+                <div className="relative w-full h-[100dvh] bg-transparent">
                     <div className="fixed inset-0 z-0">
                         <Canvas>
                             <OrthographicCamera />
@@ -51,7 +50,7 @@ export default function HomeScene() {
                     </div>
 
                     {/* Landing Page Content */}
-                    <div className="relative z-10 h-[100vh] flex flex-col items-center justify-center">
+                    <div className="relative z-10 h-[100dvh] flex flex-col items-center justify-center">
                         <div className="absolute top-0 left-0 w-full h-full">
                             <Canvas>
                                 <OrthographicCamera />
@@ -66,18 +65,12 @@ export default function HomeScene() {
                         </button>
                     </div>
                     <FestVideo />
-                    <WorkShops/>
-                    {/* <h1 className="absolute z-20 text-3xl font-bold text-white bg-slate-500 w-full">Charan</h1> */}
-
-
+                    <WorkShops />
+                    <Events />
                     {/* Hello Section */}
-                    <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent">
-                        {/* <h1 className="text-3xl text-white">Hello</h1> */}
-                    </div>
+                    <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent"></div>
                 </div>
             )}
-
-            
         </div>
     );
 }

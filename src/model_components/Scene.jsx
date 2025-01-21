@@ -34,7 +34,7 @@ export default function Scene() {
     }, [progress]);
 
     return (
-        <div className="w-full h-full bg-black fixed top-0 left-0">
+        <div className="w-full h-[100dvh] bg-black fixed top-0 left-0">
             {!loaded && <LoadingCresence progress={progress}/>}
             <Canvas onCreated={() => setLoaded(true)}>
                 <PerspectiveCamera />

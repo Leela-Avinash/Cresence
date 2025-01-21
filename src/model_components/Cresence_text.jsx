@@ -121,7 +121,7 @@ export default function CresenceText(props) {
           position={[97.433, 0, 0]}
         />
       </group>
-      <OrbitControls enableZoom={false} />
+      {/* <OrbitControls enableZoom={false} /> */}
     </group>
   );
 }

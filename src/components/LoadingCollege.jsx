@@ -80,7 +80,7 @@ export default function LoadingCollege({ setVideoLoaded }) {
     }, [progress, setVideoLoaded]);
 
     return (
-        <div className="w-screen h-screen bg-black relative">
+        <div className="w-screen h-[100dvh] bg-black relative">
             <Canvas>
                 <PerspectiveCamera />
                 <Starfield numStars={3000} />
