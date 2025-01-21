@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Scene from './model_components/Scene';
+// import Scene from './model_components/Scene';
+import Stars from './model_components/Stars';
 import ExploreCollege from './components/ExploreCollege';
 import HomeScene from "./model_components/HomeScene";
 
@@ -8,9 +9,8 @@ function App() {
     <Router>
       <div className="relative w-full h-[100dvh]">
         <div className="absolute inset-0 z-0">
-          <Scene />
+          <Stars />
         </div>
-        
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<HomeScene />} />
