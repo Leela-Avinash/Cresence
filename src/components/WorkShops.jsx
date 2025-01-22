@@ -36,7 +36,7 @@ export default function WorkShops() {
                 <h1 className="z-20 pt-20 text-2xl w-full text-center text-white">
                     WORKSHOPS
                 </h1>
-                <ParticleMorphing />
+                {/* <ParticleMorphing /> */}
                 {workshops.map((workshop, index) => (
                     <div
                         key={workshop.id}

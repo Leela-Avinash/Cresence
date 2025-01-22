@@ -9,6 +9,8 @@ import Moon from "./Moon";
 import FestVideo from "../components/FestVideo";
 import WorkShops from "../components/WorkShops";
 import Events from "../components/Events";
+import NavBar from "../components/NavBar";
+import SideBar from "../components/SideBar";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -37,10 +39,15 @@ export default function HomeScene() {
             {/* {!loaded && <LoadingCresence progress={progress} />}
             {loaded && ( */}
                 <div className="relative w-full h-[100dvh] bg-transparent">
-
+                    <NavBar />
+                    
                     {/* Landing Page Content */}
                     <div className="relative z-10 h-[100dvh] flex flex-col items-center justify-center">
-                        <div className="absolute top-0 left-0 w-full h-full">
+                        <div className="absolute top-56 left-0 z-10"> 
+                            <SideBar/>
+                        </div>
+                        <div className="absolute top-0 left-0 w-full h-full z-20">
+
                             <Canvas>
                                 <OrthographicCamera />
                                 <CresenceText />
