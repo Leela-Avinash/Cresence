@@ -126,10 +126,10 @@ const ParticleSystem = () => {
     const newModelRef = useRef();
     const AmbientLightRef = useRef();
     const DirectLightRef = useRef();
-    const [Scale_c, setScale] = React.useState([1, 1, 1]);
+    // const [Scale_c, setScale] = React.useState([1, 1, 1]);
     // const scroll = useScroll();
     const startTimeRef = useRef(null);
-    const [resizeCompleted, setResizeCompleted] = React.useState(false);
+    // const [resizeCompleted, setResizeCompleted] = React.useState(false);
     // const modelA = useGLTF("/fontforweb.glb");
     const modelB = useGLTF("models/fontforweb.glb"); 
     const { scene, nodes } = useGLTF("models/fontforweb.glb"); 
@@ -139,40 +139,40 @@ const ParticleSystem = () => {
             meshes.push(node);
         }
     });
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         const width = window.innerWidth;
+
+    //         if (width <= 480) { // Small phones (e.g., iPhone SE, small Androids)
+    //             setScale([0.4, 0.4, 0.4]); // Very small scale for very small screens
+    //         } else if (width <= 600) { // Larger phones (e.g., iPhone 6/7/8, Galaxy S)
+    //             setScale([0.5, 0.5, 0.5]); // Slightly larger scale for small phones
+    //         } else if (width <= 768) { // Tablets in portrait mode (e.g., iPad, Android tablets)
+    //             setScale([0.6, 0.6, 0.6]); // Scale for tablets, iPads in portrait mode
+    //         } else if (width <= 1024) { // Larger tablets, landscape (e.g., iPad Pro, Android tablets)
+    //             setScale([0.66, 0.66, 0.66]); // Slightly larger scale for landscape tablet screens
+    //         } else if (width <= 1280) { // Small laptops (e.g., MacBook, some smaller laptops)
+    //             setScale([1, 1, 1]); // Default scale for small laptops
+    //         } else if (width <= 1440) { // Medium-sized laptops/desktops
+    //             setScale([1.1, 1.1, 1.1]); // Larger scale for medium laptops
+    //         } else if (width <= 1600) { // Large laptops/desktops
+    //             setScale([1.2, 1.2, 1.2]); // Slightly larger scale for large desktop screens
+    //         } else { // Large desktop monitors (e.g., 4K, large-screen desktop)
+    //             setScale([1.3, 1.3, 1.3]); // Maximum scale for large screens
+    //         }
+    //         setResizeCompleted(true); // Set resize as complete
+    //     };
+
+    //     handleResize(); // Run it immediately for the first render
+    //     window.addEventListener("resize", handleResize);
+
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize);
+    //     };
+    // }, []); 
+
     useEffect(() => {
-        const handleResize = () => {
-            const width = window.innerWidth;
-
-            if (width <= 480) { // Small phones (e.g., iPhone SE, small Androids)
-                setScale([0.4, 0.4, 0.4]); // Very small scale for very small screens
-            } else if (width <= 600) { // Larger phones (e.g., iPhone 6/7/8, Galaxy S)
-                setScale([0.5, 0.5, 0.5]); // Slightly larger scale for small phones
-            } else if (width <= 768) { // Tablets in portrait mode (e.g., iPad, Android tablets)
-                setScale([0.6, 0.6, 0.6]); // Scale for tablets, iPads in portrait mode
-            } else if (width <= 1024) { // Larger tablets, landscape (e.g., iPad Pro, Android tablets)
-                setScale([0.66, 0.66, 0.66]); // Slightly larger scale for landscape tablet screens
-            } else if (width <= 1280) { // Small laptops (e.g., MacBook, some smaller laptops)
-                setScale([1, 1, 1]); // Default scale for small laptops
-            } else if (width <= 1440) { // Medium-sized laptops/desktops
-                setScale([1.1, 1.1, 1.1]); // Larger scale for medium laptops
-            } else if (width <= 1600) { // Large laptops/desktops
-                setScale([1.2, 1.2, 1.2]); // Slightly larger scale for large desktop screens
-            } else { // Large desktop monitors (e.g., 4K, large-screen desktop)
-                setScale([1.3, 1.3, 1.3]); // Maximum scale for large screens
-            }
-            setResizeCompleted(true); // Set resize as complete
-        };
-
-        handleResize(); // Run it immediately for the first render
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []); 
-
-    useEffect(() => {
-        if (!resizeCompleted) return; 
+        // if (!resizeCompleted) return; 
 
         const particleCount = 50000;
         const geometryB = extractCombinedGeometry(modelB);
@@ -247,7 +247,7 @@ const ParticleSystem = () => {
             duration: 3,
             ease: "power2.inOut",
         });
-    }, [modelB, resizeCompleted]);
+    }, [modelB]);
 
     useFrame(() => {
         if (startTimeRef.current && materialRef.current) {
@@ -275,7 +275,7 @@ const ParticleSystem = () => {
     });
 
     return (
-        <group scale={Scale_c}>
+        <group>
             <points ref={particlesRef} scale={[1, 1, 1]}>
                 <shaderMaterial
                     ref={materialRef}
