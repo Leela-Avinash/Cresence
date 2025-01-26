@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { MoveLeft, MoveRight } from "lucide-react";
-import {team} from "../utils/Content";
+import { eventData } from "../utils/Content";
 
-const ImageCarousel = () => {   
+const EventsCarousel = () => {
     const [centerIndex, setCenterIndex] = useState(0);
     const carouselRef = useRef(null);
     const [isOverflow, setIsOverflow] = useState(false);
@@ -15,7 +15,7 @@ const ImageCarousel = () => {
             if (carouselRef.current) {
                 const containerWidth = carouselRef.current.offsetWidth;
                 const totalSlidesWidth =
-                    team.length * 300 + (team.length - 1) * 64;
+                    eventData.length * 300 + (eventData.length - 1) * 64;
                 setIsOverflow(totalSlidesWidth > containerWidth);
             }
         };
@@ -23,7 +23,7 @@ const ImageCarousel = () => {
         checkOverflow();
         window.addEventListener("resize", checkOverflow);
         return () => window.removeEventListener("resize", checkOverflow);
-    }, [team.length]);
+    }, [eventData.length]);
 
     const handleMove = (splide) => {
         const newCenterIndex = splide.index;
@@ -47,7 +47,7 @@ const ImageCarousel = () => {
                 ref={splideRef}
                 options={{
                     type: "loop",
-                    perPage: 5,
+                    perPage: 3,
                     perMove: 1,
                     focus: "center",
                     fixedWidth: "300px",
@@ -58,75 +58,34 @@ const ImageCarousel = () => {
                     drag: isOverflow,
                     clones: isOverflow ? undefined : 10,
                     breakpoints: {
-                        1280: { 
-                            perPage: 3, 
-                            fixedWidth: "350px",
-                            height: "450px" 
-                        },
-                        1024: { 
-                            perPage: 2, 
-                            fixedWidth: "300px",
-                            height: "400px" 
-                        },
-                        768: { 
-                            perPage: 1, 
-                            fixedWidth: "250px",
-                            height: "350px" 
-                        },
-                        480: { 
-                            perPage: 1, 
-                            fixedWidth: "200px",
-                            height: "300px" 
-                        },
+                        1280: { perPage: 2, fixedWidth: "350px" },
+                        1024: { perPage: 1, fixedWidth: "300px" },
+                        768: { perPage: 1, fixedWidth: "250px" },
+                        480: { perPage: 1, fixedWidth: "200px" },
                     }
                 }}
                 onMove={handleMove}
             >
-                {team.map((member, index) => (
+                {eventData.map((event, index) => (
                     <SplideSlide key={index}>
                         <div
-                            className={`transition-all duration-1000 ease-in-out mx-auto ${
-                                index === centerIndex
-                                    ? "scale-100 opacity-100 filter-none"
-                                    : "scale-80 opacity-10 filter grayscale"
-                            }`}
-                            style={{
-                                transform: `scale(${
-                                    index === centerIndex ? 1 : 0.8
-                                })`,
-                                opacity: index === centerIndex ? 1 : 0.1,
-                            }}
+                            className={`transition-all duration-700 ease-in-out mx-auto`}
                         >
-                            <div className="overflow-hidden rounded-xl shadow-lg">
+                            <div className="overflow-hidden rounded-xl shadow-lg p-4 bg-gray-800 text-white">
                                 <img
-                                    src={member.image}
-                                    alt={`Slide ${index}`}
-                                    className="object-cover lg:h-[450px] md:h-[400px] h-[300px]"
+                                    src={event.imgSrc}
+                                    alt={event.name}
+                                    className="object-cover w-full h-64 rounded-lg"
                                 />
+                                <h3 className="text-2xl font-bold mt-4">{event.name}</h3>
+                                <p className="text-lg">{event.resource_person}</p>
+                                <p className="text-md mt-2">{event.dates}</p>
+                                <p className="text-sm mt-2">{event.description}</p>
                             </div>
                         </div>
                     </SplideSlide>
                 ))}
             </Splide>
-            <div className="lg:absolute lg:top-4 lg:left-[62%] lg:bg-transparent lg:text-left text-white text-center mt-4">
-                <h2 className="text-4xl font-bold mb-4">
-                    {team[centerIndex].Role}
-                </h2>
-                <p className="text-lg">{team[centerIndex].Name}</p>
-                <div id="socials" className="mt-4">
-                    {team[centerIndex].socials.map((social, idx) => (
-                        <a
-                            key={idx}
-                            href={social.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mr-2"
-                        >
-                            <i>{social.name}</i>
-                        </a>
-                    ))}
-                </div>
-            </div>
             <div className="flex justify-center gap-6 mt-6">
                 <button
                     onClick={goPrev}
@@ -145,4 +104,4 @@ const ImageCarousel = () => {
     );
 };
 
-export default ImageCarousel;
+export default EventsCarousel;

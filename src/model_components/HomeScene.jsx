@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useProgress } from "@react-three/drei";
-// import CresenceText from "./Cresence_text";
 import CresenceText from "./ParticleSystem";
 import { useNavigate } from "react-router-dom";
 import LoadingCresence from "../components/LoadingCresence";
@@ -12,6 +11,7 @@ import Events from "../components/Events";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import OurTeam from "../components/OurTeam";
+import EventsCarousel from "../components/EventsCarousel";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -59,12 +59,12 @@ export default function HomeScene() {
                             {/* <OrbitControls /> */}
                         </Canvas>
                     </div>
-                    <div className="absolute bottom-[30vh]  text-{1.5}">
+                    {/* <div className="absolute bottom-[30vh]  text-{1.5}">
                         <p style={{ wordSpacing: "0.5rem" }} className="text-lg bg-gradient-to-r from-green-300  to-cyan-200  font-serif italic text-transparent bg-clip-text">March - 12&13, 2k25</p>
-                    </div>
+                    </div> */}
                     <button
-                        className="absolute right-5 bottom-5 px-6 py-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 text-white text-lg font-mono italic rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
-                        onClick={() => navigate("/explore")}
+                        className="absolute z-20 right-5 bottom-5 px-6 py-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 text-white text-lg font-mono italic rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                        onClick={() => { navigate("/explore"); console.log("clicked explore") }}
                     >
                         Explore →
                     </button>
@@ -77,6 +77,7 @@ export default function HomeScene() {
                 <WorkShops />
                 <Events />
                 <OurTeam />
+                <EventsCarousel />
                 {/* Hello Section */}
                 <div className="relative h-[100vh] flex items-center justify-center bg-transparent"></div>
             </div>

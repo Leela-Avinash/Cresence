@@ -186,6 +186,16 @@ const OurTeam = () => {
                         <h2 className="text-5xl font-bold">Our Team</h2>
                     </div>
                     <ImageCarousel />
+                    <div className="text-center lg:hidden m-10 ">
+                        <p>
+                            The team of "CreSencE" is a dynamic group of young
+                            individuals who are eager to make a difference in
+                            the tech industry. Their hard work, dedication, and
+                            passion for technology are reflected in the success
+                            of the festival, making it an exciting and enriching
+                            experience for all participants.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
