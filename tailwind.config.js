@@ -7,8 +7,12 @@ export default {
   ],
   theme: {
     extend: {
-      
-      
+      boxShadow: {
+        glow: "0 0 1px rgba(0, 255, 255, 0.8)", // You can adjust the color and blur radius here
+      },
+      backgroundImage: {
+        'custom-gif': "url('public/images/galaxy.gif')",
+      },
     },
   },
   plugins: [
