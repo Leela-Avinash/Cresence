@@ -7,3 +7,8 @@
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 } */
+
+.splide__slide.is-active img {
+    transform: scale(1);
+  }
+  

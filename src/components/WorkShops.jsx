@@ -1,5 +1,4 @@
 import React from "react";
-import ParticleMorphing from "../morphing/ParticleMorphing";
 
 export default function WorkShops() {
     const workshops = [

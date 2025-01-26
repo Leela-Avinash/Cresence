@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Stars from './model_components/Stars';
 import ExploreCollege from './components/ExploreCollege';
 import HomeScene from "./model_components/HomeScene";
+import CanvasCursor from "./components/CanvasCursor";
 
 function App() {
   return (
     <Router>
       <div className="relative w-full h-[100dvh]">
-        <div className="absolute inset-0 z-0">
+        <CanvasCursor />
+        <div className="absolute inset-0 -z-50">
           <Stars />
         </div>
         <div className="relative z-10">

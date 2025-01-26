@@ -11,6 +11,8 @@ import WorkShops from "../components/WorkShops";
 import Events from "../components/Events";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import ImageCarousel from "../components/Slider";
+import OurTeam from "../components/OurTeam";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -47,7 +49,6 @@ export default function HomeScene() {
                             <SideBar/>
                         </div>
                         <div className="absolute top-0 left-0 w-full h-full z-20">
-
                             <Canvas>
                                 <OrthographicCamera />
                                 <CresenceText />
@@ -63,10 +64,12 @@ export default function HomeScene() {
                     <FestVideo />
                     <WorkShops />
                     <Events />
+                    {/* <OurTeamCarousel /> */}
+                    <OurTeam />
                     {/* Hello Section */}
                     <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent"></div>
                 </div>
-            {/* )} */}
+            {/* )}  */}
         </div>
     );
 }
