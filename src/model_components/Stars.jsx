@@ -16,7 +16,7 @@ export default function Stars() {
         }
     }, [progress]);
   return (
-    <div className="w-full h-full bg-black fixed top-0 left-0">
+    <div className="w-full h-full  bg-[url('images/rm218-bb-07.jpg')] bg-cover bg-center bg-opacity-30 fixed top-0 left-0">
          {!loaded && <LoadingCresence progress={progress}/>}
       <Canvas  onCreated={() => setLoaded(true)} camera={{ position: [0, 0, 1] }}>
         <group>

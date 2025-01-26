@@ -10,6 +10,8 @@ import * as THREE from "three";
 import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { temp } from "three/tsl";
 import { gsap } from "gsap";
+import { Star } from "lucide-react";
+import { useState } from "react";
 
 const extractCombinedGeometry = (model) => {
     const geometries = [];
@@ -96,8 +98,8 @@ const generateParticlesOnPlane = (width, height, breadth, count) => {
     for (let i = 0; i < count; i++) {
         // Randomly distribute particles on the plane
         const x = Math.random() * width - width / 2; // Center the particles on the plane
-        const y = Math.random() * height - height / 2 + 1;
-        const z = Math.random() * breadth - breadth / 2; // Keep particles on the plane (z = 0)
+        const y = Math.random() * height - height / 2 ;
+        const z = Math.random() * breadth - breadth / 2+1; // Keep particles on the plane (z = 0)
         if (i == 0) console.log(x, y, z);
 
         tempPosition[i * 3] = x;
@@ -121,18 +123,26 @@ const generateParticlesOnPlane = (width, height, breadth, count) => {
 };
 
 const ParticleSystem = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const particlesRef = useRef();
     const materialRef = useRef();
     const newModelRef = useRef();
     const AmbientLightRef = useRef();
-    const DirectLightRef = useRef();
+    const DirectLightRef1 = useRef();
+    const DirectLightRef2 = useRef();
+    const DirectLightRef3 = useRef();
+    const EditionLightRef = useRef();
+    const subtitleLightRef1 = useRef();
+    const subtitleLightRef2 = useRef();
+    const subtitle = ["Curve007", "Curve008", "Curve009", "Curve010", "Curve011", "Curve012", "Curve013", "Curve014", "Curve015", "Curve016", "Curve017", "Curve018", "Curve019", "Curve020", "Curve021", "Curve022", "Curve023", "Curve024", "Curve025", "Curve026", "Curve027", "Curve028", "Curve029"];
+    const edition = ["Curve030", "Curve031", "Curve032", "Curve033", "Curve034", "Curve035", "Curve036", "Curve037", "Curve038", "Curve039", "Curve040"];
     // const [Scale_c, setScale] = React.useState([1, 1, 1]);
     // const scroll = useScroll();
     const startTimeRef = useRef(null);
     // const [resizeCompleted, setResizeCompleted] = React.useState(false);
     // const modelA = useGLTF("/fontforweb.glb");
-    const modelB = useGLTF("models/fontforweb.glb"); 
-    const { scene, nodes } = useGLTF("models/fontforweb.glb"); 
+    const modelB = useGLTF("models/fontforweb.glb");
+    const { scene, nodes } = useGLTF("models/fontforweb.glb");
     const meshes = [];
     Object.values(nodes).forEach((node) => {
         if (node.isMesh) {
@@ -173,6 +183,7 @@ const ParticleSystem = () => {
 
     useEffect(() => {
         // if (!resizeCompleted) return; 
+        if (isLoaded) return;
 
         const particleCount = 50000;
         const geometryB = extractCombinedGeometry(modelB);
@@ -189,27 +200,54 @@ const ParticleSystem = () => {
         geometry.setAttribute("color", new THREE.BufferAttribute(particlesA.tempColor, 3));
 
         particlesRef.current.geometry = geometry;
-        particlesRef.current.rotation.x = Math.PI / 2;
-        particlesRef.current.scale.set(5, 5, 5);
-        newModelRef.current.rotation.x = Math.PI / 2;
-        newModelRef.current.scale.set(5, 5, 5);
+        
+         // particlesRef.current.scale.set(5, 5, 5);
+        // newModelRef.current.scale.set(5, 5, 5);
+        const scaleFactor = Math.min(window.innerWidth / 250, window.innerHeight / 150); // Adjust divisor values as needed
+        particlesRef.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
+        newModelRef.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
         newModelRef.current.traverse((child) => {
             if (child.isMesh) {
-                child.material = new THREE.MeshStandardMaterial({
-                    color: 0xffffff,
-                    opacity: 0,
-                    transparent: true,
-                    depthWrite: false,
-                    depthTest: false,
-                    emissive: 0x000000,
-                    roughness: 0.2,
-                    metalness: 0.7,
-                });
+                if (subtitle.includes(child.name)) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        color: 0x5790eb,
+                        opacity: 0,
+                        transparent: true,
+                        // depthWrite: false,
+                        // depthTest: false,
+                        emissive: 0x000000,
+                        roughness: 0.2,
+                        metalness: 0.7,
+                    });
+                } else if (edition.includes(child.name)) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        color: 0x5790eb,
+                        opacity: 0,
+                        transparent: true,
+                        // depthWrite: false,
+                        // depthTest: false,
+                        emissive: 0x000000,
+                        roughness: 0.2,
+                        metalness: 0.7,
+                    });
+                } else {
+                    child.material = new THREE.MeshStandardMaterial({
+                        color: 0x925ce0,
+                        opacity: 0,
+                        transparent: true,
+                        // depthWrite: false,
+                        // depthTest: false,
+                        emissive: 0x000000,
+                        roughness: 0.2,
+                        metalness: 0.7,
+                    });
+                }
             }
         });
-
+        // setIsLoaded(true);
         startTimeRef.current = performance.now();
+        
 
         gsap.to(materialRef.current.uniforms.fadeFactor, {
             value: 0,
@@ -236,18 +274,51 @@ const ParticleSystem = () => {
         }
 
         gsap.to(AmbientLightRef.current, {
-            intensity: 1,
+            intensity: 2,
+            delay: 2.0,
+            duration: 3,
+            ease: "power2.inOut",
+        });
+        gsap.to(DirectLightRef1.current, {
+            intensity: 10,
             delay: 3.0,
             duration: 3,
             ease: "power2.inOut",
         });
-        gsap.to(DirectLightRef.current, {
-            intensity: 0.5,
-            delay: 3.0,
+        gsap.to(DirectLightRef2.current, {
+            intensity: 10,
+            delay: 4.0,
             duration: 3,
             ease: "power2.inOut",
         });
-    }, [modelB]);
+        gsap.to(DirectLightRef3.current, {
+            intensity: 10,
+            delay: 5.0,
+            duration: 3,
+            ease: "power2.inOut",
+        });
+        gsap.to(EditionLightRef.current, {
+            intensity: 10,
+            delay: 6.0,
+            duration: 3,
+            ease: "power2.inOut",
+        });
+        gsap.to(subtitleLightRef1.current, {
+            intensity: 10,
+            delay: 7.0,
+            duration: 3,
+            ease: "power2.inOut",
+        });
+        gsap.to(subtitleLightRef2.current, {
+            intensity: 10,
+            delay: 8.0,
+            duration: 3,
+            ease: "power2.inOut",
+        });
+
+
+    }, [modelB,isLoaded]);
+
 
     useFrame(() => {
         if (startTimeRef.current && materialRef.current) {
@@ -268,15 +339,21 @@ const ParticleSystem = () => {
             materialRef.current.uniforms.scaleFactor.value = scaleFactor;
             materialRef.current.uniforms.dispersionFactor.value =
                 dispersionFactor;
+            console.log(morphFactor, scaleFactor, dispersionFactor);
         }
         // if (particlesRef.current) {
         //     particlesRef.current.rotation.y += 0.001; // Adjust the rotation speed as desired
         // }
     });
+    // particlesRef.current.rotation.x = Math.PI / 2;
+    //  if(startTimeRef.current){
+    //     startTimeRef.current = null;
+    //  }  
+    //     newModelRef.current.rotation.x = Math.PI / 2;
 
     return (
         <group>
-            <points ref={particlesRef} scale={[1, 1, 1]}>
+            <points ref={particlesRef} scale={[1, 1, 1]} >
                 <shaderMaterial
                     ref={materialRef}
                     uniforms={{
@@ -323,18 +400,55 @@ const ParticleSystem = () => {
             <ambientLight
                 ref={AmbientLightRef}
                 intensity={0}
-                color={"#925ce0"}
+                color={"#320442"}
+
             />
-            <directionalLight
-                ref={DirectLightRef}
+            <pointLight
+                ref={DirectLightRef2}
                 intensity={0}
-                position={[0, 0, 5]}
+                position={[0, 0, 1]}
+                color={"#320442"}
             />
+            <pointLight
+                ref={DirectLightRef3}
+                intensity={0}
+                position={[1.7, 0, 1]}
+                color={"#320442"}
+            />
+            <pointLight
+                ref={DirectLightRef1}
+                intensity={0}
+                position={[-1.4, 0, 1]}
+
+                color={"#320442"}
+            />
+            <pointLight
+                ref={EditionLightRef}
+                intensity={0}
+                position={[-1.1, -0.5, 1]}
+
+                color={"#5790eb"}
+            />
+            <pointLight
+                ref={subtitleLightRef1}
+                intensity={0}
+                position={[0.7, -0.5, 1]}
+                color={"#5790eb"}
+            />
+            <pointLight
+                ref={subtitleLightRef2}
+                intensity={0}
+                position={[1.5, -0.5, 1]}
+                color={"#5790eb"}
+            />
+
             <primitive
                 object={scene}
                 ref={newModelRef}
                 scale={[1, 1, 1]}
                 position={[0, 0, 0]}
+                
+                rotation={[Math.PI / 2, 0, 0]}
             />
         </group>
     );

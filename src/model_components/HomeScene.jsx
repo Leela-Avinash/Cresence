@@ -11,6 +11,7 @@ import WorkShops from "../components/WorkShops";
 import Events from "../components/Events";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import OurTeam from "../components/OurTeam";
 
 function OrthographicCamera() {
     const { camera, size } = useThree();
@@ -38,35 +39,49 @@ export default function HomeScene() {
         <div className="w-full h-auto bg-transparent relative">
             {/* {!loaded && <LoadingCresence progress={progress} />}
             {loaded && ( */}
-                <div className="relative w-full h-[100dvh] bg-transparent">
+            <div className="relative w-full h-[100dvh] bg-transparent">
+                <div className="absolute top-0 w-full z-30">
                     <NavBar />
-                    
-                    {/* Landing Page Content */}
-                    <div className="relative z-10 h-[100dvh] flex flex-col items-center justify-center">
-                        <div className="absolute top-56 left-0 z-10"> 
-                            <SideBar/>
-                        </div>
-                        <div className="absolute top-0 left-0 w-full h-full z-20">
-
-                            <Canvas>
-                                <OrthographicCamera />
-                                <CresenceText />
-                            </Canvas>
-                        </div>
-                        <button
-                            className="absolute right-5 bottom-5 px-5 py-2 bg-white/10 border border-white/50 text-white rounded-md hover:bg-white/20 transition hover:cursor-pointer"
-                            onClick={() => navigate("/explore")}
-                        >
-                            Explore →
-                        </button>
-                    </div>
-                    <FestVideo />
-                    <WorkShops />
-                    <Events />
-                    {/* Hello Section */}
-                    <div className="relative z-20 h-[100vh] flex items-center justify-center bg-transparent"></div>
                 </div>
+
+                {/* Landing Page Content */}
+                <div className="relative h-[100dvh] flex flex-col items-center justify-center">
+                    <div className="hidden md:flex absolute inset-0 z-10 flex-col justify-center">
+                        <div className="">
+                            <SideBar />
+                        </div>
+                    </div>
+                    <div className="absolute top-0 left-0 w-full h-full">
+
+                        <Canvas >
+                            <OrthographicCamera />
+                            <CresenceText />
+                            {/* <OrbitControls /> */}
+                        </Canvas>
+                    </div>
+                    <div className="absolute bottom-[30vh]  text-{1.5}">
+                        <p style={{ wordSpacing: "0.5rem" }} className="text-lg bg-gradient-to-r from-green-300  to-cyan-200  font-serif italic text-transparent bg-clip-text">March - 12&13, 2k25</p>
+                    </div>
+                    <button
+                        className="absolute right-5 bottom-5 px-6 py-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 text-white text-lg font-mono italic rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
+                        onClick={() => navigate("/explore")}
+                    >
+                        Explore →
+                    </button>
+
+                </div>
+                <div>
+                    Date
+                </div>
+                <FestVideo />
+                <WorkShops />
+                <Events />
+                <OurTeam />
+                {/* Hello Section */}
+                <div className="relative h-[100vh] flex items-center justify-center bg-transparent"></div>
+            </div>
             {/* )} */}
+            
         </div>
     );
 }
