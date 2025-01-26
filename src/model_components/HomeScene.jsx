@@ -11,8 +11,6 @@ import WorkShops from "../components/WorkShops";
 import Events from "../components/Events";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
-
-import ImageCarousel from "../components/Slider";
 import OurTeam from "../components/OurTeam";
 
 function OrthographicCamera() {
@@ -65,7 +63,7 @@ export default function HomeScene() {
                         <p style={{ wordSpacing: "0.5rem" }} className="text-lg bg-gradient-to-r from-green-300  to-cyan-200  font-serif italic text-transparent bg-clip-text">March - 12&13, 2k25</p>
                     </div>
                     <button
-                        className="absolute right-5 bottom-5 text-[#800000] px-6 py-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 text-white text-lg font-mono italic rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
+                        className="absolute right-5 bottom-5 px-6 py-3 bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 text-white text-lg font-mono italic rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out"
                         onClick={() => navigate("/explore")}
                     >
                         Explore →
@@ -78,6 +76,7 @@ export default function HomeScene() {
                 <FestVideo />
                 <WorkShops />
                 <Events />
+                <OurTeam />
                 {/* Hello Section */}
                 <div className="relative h-[100vh] flex items-center justify-center bg-transparent"></div>
             </div>

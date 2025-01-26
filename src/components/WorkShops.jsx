@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, { useEffect, useRef } from "react";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {gsap} from "gsap";
->>>>>>> a491e764e16f4c79d5a5f879970a82a74a157bbf
 
 export default function WorkShops() {
     const workshops = [
