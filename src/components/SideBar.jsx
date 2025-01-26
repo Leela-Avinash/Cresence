@@ -1,53 +1,84 @@
-import React, { useState } from 'react';
+import React, { useRef } from "react";
+import { Images, UsersRound, HandHelping, Info } from "lucide-react";
+import gsap from "gsap";
 
 function Sidebar() {
-    return (
-        <div className="w-20 bg-gray-800 h-full p-4 relative flex flex-col justify-between">
-            {/* Logo Section for Links */}
-            <div className="flex flex-col items-center space-y-4">
-                
-                {/* Team Link */}
-                <div className="group relative flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center group-hover:w-24 transition-all duration-300">
-                        <img src="path_to_logo_team" alt="Logo" className="w-8 h-8" />
-                    </div>
-                    <div className="group-hover:block absolute left-16 top-0 bg-gray-700 text-white rounded-md p-2 hidden">
-                        <a href="#team" className="block px-4 py-2 hover:bg-blue-500">Our Team</a>
-                    </div>
-                </div>
+  // Refs for the text elements
+  const teamTextRef = useRef(null);
+  const aboutTextRef = useRef(null);
+  const galleryTextRef = useRef(null);
+  const sponsorsTextRef = useRef(null);
 
-                {/* About Link */}
-                <div className="group relative flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center group-hover:w-24 transition-all duration-300">
-                        <img src="path_to_logo_about" alt="Logo" className="w-8 h-8" />
-                    </div>
-                    <div className="group-hover:block absolute left-16 top-0 bg-gray-700 text-white rounded-md p-2 hidden">
-                        <a href="#about" className="block px-4 py-2 hover:bg-green-500">About</a>
-                    </div>
-                </div>
+  // Function to handle mouse enter (fade-in)
+  const handleMouseEnter = (textRef) => {
+    gsap.to(textRef.current, {
+      opacity: 1,
+      display: "block",
+    });
+  };
 
-                {/* Gallery Link */}
-                <div className="group relative flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center group-hover:w-24 transition-all duration-300">
-                        <img src="path_to_logo_gallery" alt="Logo" className="w-8 h-8" />
-                    </div>
-                    <div className="group-hover:block absolute left-16 top-0 bg-gray-700 text-white rounded-md p-2 hidden">
-                        <a href="#gallery" className="block px-4 py-2 hover:bg-red-500">Gallery</a>
-                    </div>
-                </div>
+  // Function to handle mouse leave (fade-out)
+  const handleMouseLeave = (textRef) => {
+    gsap.to(textRef.current, {
+      opacity: 0,
+      onComplete: () => {
+        textRef.current.style.display = "none";
+      },
+    });
+   
+  };
 
-                {/* Sponsors Link */}
-                <div className="group relative flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center group-hover:w-24 transition-all duration-300">
-                        <img src="path_to_logo_sponsors" alt="Logo" className="w-8 h-8" />
-                    </div>
-                    <div className="group-hover:block absolute left-16 top-0 bg-gray-700 text-white rounded-md p-2 hidden">
-                        <a href="#sponsors" className="block px-4 py-2 hover:bg-yellow-500">Sponsors</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="rounded-r-3xl h-full p-4 flex flex-col space-y-4 justify-between">
+      {/* Team Link */}
+      <div
+        onMouseEnter={() => handleMouseEnter(teamTextRef)}
+        onMouseLeave={() => handleMouseLeave(teamTextRef)}
+        className="border-2 border-gray-600 hover:border-teal-600 text-teal-600 rounded-full cursor-pointer space-x-4 flex w-fit items-center p-4 justify-evenly transition-all duration-300 hover:shadow-teal-600 hover:shadow-sm"
+      >
+        <UsersRound className="" />
+        <p ref={teamTextRef} className="hidden font-bold ">
+          OUR TEAM
+        </p>
+      </div>
+
+      {/* About Link */}
+      <div
+        onMouseEnter={() => handleMouseEnter(aboutTextRef)}
+        onMouseLeave={() => handleMouseLeave(aboutTextRef)}
+        className="border-2 border-gray-600  cursor-pointer hover:border-rose-700 text-rose-700 rounded-full space-x-4 flex items-center w-fit p-4 justify-evenly transition-all duration-300 hover:shadow-rose-700 hover:shadow-sm"
+      >
+        <Info />
+        <p ref={aboutTextRef} className="hidden font-bold">
+          ABOUT
+        </p>
+      </div>
+
+      {/* Gallery Link */}
+      <div
+        onMouseEnter={() => handleMouseEnter(galleryTextRef)}
+        onMouseLeave={() => handleMouseLeave(galleryTextRef)}
+        className="border-2 border-gray-600  cursor-pointer hover:border-blue-600 text-blue-600 rounded-full space-x-4 flex items-center w-fit p-4 transition-all duration-300 hover:shadow-blue-600 hover:shadow-sm"
+      >
+        <Images  />
+        <p ref={galleryTextRef} className="hidden font-bold">
+          GALLERY
+        </p>
+      </div>
+
+      {/* Sponsors Link */}
+      <div
+        onMouseEnter={() => handleMouseEnter(sponsorsTextRef)}
+        onMouseLeave={() => handleMouseLeave(sponsorsTextRef)}
+        className="border-2 border-gray-600 cursor-pointer hover:border-yellow-600 text-yellow-600 rounded-full space-x-4 flex items-center w-fit p-4 transition-all duration-300 hover:shadow-yellow-600 hover:shadow-m"
+      >
+        <HandHelping  />
+        <p ref={sponsorsTextRef} className="hidden font-bold">
+          SPONSORS
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default Sidebar;
